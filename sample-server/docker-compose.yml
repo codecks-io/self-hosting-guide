@@ -1,0 +1,80 @@
+services:
+  node-api:
+    image: dockerhub.codecks.io/cdx/node-api-u20:${CDX_VERSION:?set CDX_VERSION}
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      PSQL_HOSTNAME: db
+
+  image-resizer:
+    image: dockerhub.codecks.io/cdx/node-api-u20:${CDX_VERSION:?set CDX_VERSION}
+    command: node node-api/build/docker/img-server.js
+    environment:
+      TRANSLATE_HOST: localhost:9000->minio:9000
+
+  worker:
+    image: dockerhub.codecks.io/cdx/node-api-u20:${CDX_VERSION:?set CDX_VERSION}
+    command: node node-api/build/docker/jobs.js
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      PSQL_HOSTNAME: db
+
+  db:
+    image: postgres:15
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${PSQL_DB_NAME}
+      POSTGRES_USER: ${PSQL_USERNAME}
+      POSTGRES_PASSWORD: ${PSQL_PASSWORD}
+
+  db-scripts:
+    image: dockerhub.codecks.io/cdx/db-scripts:${CDX_VERSION:?set CDX_VERSION}
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      PSQL_HOSTNAME: db
+      PGPASSWORD: ${PSQL_PASSWORD}
+
+  frontend:
+    image: dockerhub.codecks.io/cdx/frontend:${CDX_VERSION:?set CDX_VERSION}
+    environment:
+      REACT_APP_API_HOST: ${API_HOST}
+      REACT_APP_PUSH_HOST: ${PUSH_HOST}
+      REACT_APP_IMG_RESIZER_HOST: ${IMG_RESIZER_HOST}
+      REACT_APP_MAX_STORAGE_MBS: ${MAX_STORAGE_MBS}
+
+  minio:
+    image: minio/minio:latest
+    volumes:
+      - s3-data:/data
+    environment:
+      MINIO_ROOT_USER: ${AWS_ACCESS_KEY_ID}
+      MINIO_ROOT_PASSWORD: ${AWS_SECRET_ACCESS_KEY}
+    command: server /data
+
+  caddy:
+    image: caddy:2-alpine
+    env_file:
+      - .env
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+volumes:
+  s3-data:
+  db-data:
+  caddy_data:
+  caddy_config:

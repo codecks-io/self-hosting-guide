@@ -1,0 +1,26 @@
+# rename this file to `.env`
+
+CDX_VERSION=2.84.0
+
+PSQL_USERNAME=codecks
+PSQL_DB_NAME=codecks
+PSQL_PASSWORD=somethingsecret
+
+API_HOST=https://api.codecks.example.com
+PUSH_HOST=wss://api.codecks.example.com/push
+WEB_HOST=https://codecks.example.com
+IMG_RESIZER_HOST=https://img.codecks.example.com
+
+CUSTOM_S3_ENDPOINT=http://minio:9000
+AWS_UPLOAD_HOST=https://s3.codecks.example.com
+AWS_UPLOAD_BUCKET=user-uploads
+AWS_ACCESS_KEY_ID=inventsomething
+AWS_SECRET_ACCESS_KEY=inventevenmore
+
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=example@gmail.com
+SMTP_PASSWORD=password
+FROM_ADDRESS="Codecks <codecks@example.com>"
+
+MAX_STORAGE_MBS=250

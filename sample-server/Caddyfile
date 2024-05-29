@@ -1,0 +1,16 @@
+codecks.example.com {
+  reverse_proxy * http://frontend
+}
+
+api.codecks.example.com {
+  reverse_proxy * http://node-api:9393
+}
+
+# you probably want to cache the results (e.g. via https://github.com/caddyserver/cache-handler)
+img.codecks.example.com {
+  reverse_proxy * http://image-resizer:9494
+}
+
+s3.codecks.example.com {
+  reverse_proxy * http://minio:9000
+}
