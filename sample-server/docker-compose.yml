@@ -1,6 +1,6 @@
 services:
   node-api:
-    image: dockerhub.codecks.io/cdx/node-api-u20:${CDX_VERSION:?set CDX_VERSION}
+    image: dockerhub.codecks.io/cdx/node-api-CLIENT_NAME:${CDX_VERSION:?set CDX_VERSION}
     depends_on:
       - db
     env_file:
@@ -9,13 +9,13 @@ services:
       PSQL_HOSTNAME: db
 
   image-resizer:
-    image: dockerhub.codecks.io/cdx/node-api-u20:${CDX_VERSION:?set CDX_VERSION}
+    image: dockerhub.codecks.io/cdx/node-api-CLIENT_NAME:${CDX_VERSION:?set CDX_VERSION}
     command: node node-api/build/docker/img-server.js
     environment:
       TRANSLATE_HOST: localhost:9000->minio:9000
 
   worker:
-    image: dockerhub.codecks.io/cdx/node-api-u20:${CDX_VERSION:?set CDX_VERSION}
+    image: dockerhub.codecks.io/cdx/node-api-CLIENT_NAME:${CDX_VERSION:?set CDX_VERSION}
     command: node node-api/build/docker/jobs.js
     depends_on:
       - db
