@@ -7,7 +7,7 @@ You should be familiar with reading and configuring `docker-compose.yml` files a
 ## Pre-Requisites
 
 - A server with 4-8GB RAM, 40GB+ HD, and Docker 20.10.7+ installed.
-- Your desired domain (e.g., codecks.example.com) and *.codecks.example.com should be pointing to the server.
+- Your desired domain (e.g. codecks.example.com) and *.codecks.example.com should be pointing to the server.
 - Credentials for email via SMTP or SES (you can also extend the provided docker-compose files by including a service like [Postal](https://docs.postalserver.io/)).
 
 ## Introduction
@@ -82,10 +82,10 @@ To get familiar with the process, we've prepared two sample configurations:
 
 ### Storage for user uploads
 
-Please provide the following ENV variables to the `docker-compose.yml` (e.g., by using an `.env` file):
+Please provide the following ENV variables to the `docker-compose.yml` (e.g. by using an `.env` file):
 
-- `CUSTOM_S3_ENDPOINT` (cdx/node-api needs to be able to access it; depending on your setup, this could be e.g., http://minio:9000).
-- `AWS_UPLOAD_HOST` This needs to be an address accessible from the user side. Could be e.g., `https://uploads.codecks.example.com`.
+- `CUSTOM_S3_ENDPOINT` (cdx/node-api needs to be able to access it; depending on your setup, this could be e.g. http://minio:9000).
+- `AWS_UPLOAD_HOST` This needs to be an address accessible from the user side. Could be e.g. `https://uploads.codecks.example.com`.
 - `AWS_UPLOAD_BUCKET` Pick any name; the bucket will be created below.
 - `AWS_ACCESS_KEY_ID` Create your own key here.
 - `AWS_SECRET_ACCESS_KEY` Create your own secret here.
@@ -96,7 +96,7 @@ You can use either SES on AWS or SMTP. You need to provide a `FROM_ADDRESS` vari
 
 ### SES on AWS
 
-Please provide the following ENV variables to the `docker-compose.yml` (e.g., by using an `.env` file):
+Please provide the following ENV variables to the `docker-compose.yml` (e.g. by using an `.env` file):
 
 - `AWS_SES_REGION`
 - `AWS_ACCESS_KEY_ID`
@@ -104,16 +104,16 @@ Please provide the following ENV variables to the `docker-compose.yml` (e.g., by
 
 ### SMTP
 
-Please provide the following ENV variables to the `docker-compose.yml` (e.g., by using an `.env` file):
+Please provide the following ENV variables to the `docker-compose.yml` (e.g. by using an `.env` file):
 
-- `SMTP_HOST` (e.g., smtp.gmail.com)
-- `SMTP_PORT` (e.g., 587)
-- `SMTP_USER` (optional, e.g., example@gmail.com)
-- `SMTP_PASSWORD` (optional; e.g., when using Gmail for testing, visit [this page](https://myaccount.google.com/apppasswords) to set up a password, or [this page](https://admin.google.com/ac/apps/gmail/routing) if you're using the Google Suite).
+- `SMTP_HOST` (e.g. smtp.gmail.com)
+- `SMTP_PORT` (e.g. 587)
+- `SMTP_USER` (optional, e.g. example@gmail.com)
+- `SMTP_PASSWORD` (optional; e.g. when using Gmail for testing, visit [this page](https://myaccount.google.com/apppasswords) to set up a password, or [this page](https://admin.google.com/ac/apps/gmail/routing) if you're using the Google Suite).
 
 At the moment we only support `authMethod: "plain"`. Please get in touch with us if you require a different setup.
 
 ### Codecks-specific variables
 
-- `CDX_VERSION` (e.g., 2.84.0) refers to the latest available version. We'll send you an email once a new update is available.
+- `CDX_VERSION` (e.g. 2.84.0) refers to the latest available version. We'll send you an email once a new update is available.
 - `MAX_STORAGE_MBS` available total storage for user uploads in MB. Note that uploads for profile images and deck covers don't count toward this quota. Leave empty to allow unlimited storage.
