@@ -8,6 +8,7 @@ PSQL_PASSWORD=somethingsecret
 
 API_HOST=https://api.codecks.example.com
 PUSH_HOST=wss://api.codecks.example.com/push
+ROOM_SYNC_HOST=wss://api.codecks.example.com/room
 WEB_HOST=https://codecks.example.com
 IMG_RESIZER_HOST=https://img.codecks.example.com
 

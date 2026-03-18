@@ -8,6 +8,7 @@ PSQL_PASSWORD=somethingsecret
 
 API_HOST=http://localhost:9393
 PUSH_HOST=ws://localhost:9393/push
+ROOM_SYNC_HOST=ws://localhost:9393/room
 WEB_HOST=http://localhost:8080
 IMG_RESIZER_HOST=http://localhost:9494
 
